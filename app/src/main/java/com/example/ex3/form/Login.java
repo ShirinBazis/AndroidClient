@@ -15,7 +15,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         // the button that will transfer to the register page
         Button btnGoToRegister = findViewById(R.id.btnGoToRegister);
         btnGoToRegister.setOnClickListener(v -> {

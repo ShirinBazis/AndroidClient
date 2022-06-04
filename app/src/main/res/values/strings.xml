@@ -25,4 +25,7 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="login_btnGoToRegister">here</string>
     <string name="register_btnGoToLogin">here</string>
+    <string name="settings_btnChangePort">Change PORT</string>
+    <string name="settings_btnChangeColor">change background color</string>
+    <string name="settings_tvHeader">Settings</string>
 </resources>

@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">NSL</string>
+    <string name="app_name">SNL</string>
     <string name="login_etUsername">Username</string>
     <string name="login_etPassword">Password</string>
     <string name="login_btnLogin">login</string>
-    <string name="login_etWelcome">Welcome to NSL chat app</string>
+    <string name="login_etWelcome">Welcome to SNL chat app</string>
     <string name="Register_etNickname">Nickname</string>
     <string name="register_btnRegister">Register</string>
     <string name="login_etConfirm">Confirm password</string>

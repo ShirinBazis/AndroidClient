@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">NSL</string>
+    <string name="app_name">SNL</string>
     <string name="login_etUsername">Username</string>
     <string name="login_etPassword">Password</string>
     <string name="login_btnLogin">login</string>
-    <string name="login_etWelcome">Welcome to NSL chat app</string>
+    <string name="login_etWelcome">Welcome to SNL chat app</string>
     <string name="Register_etNickname">Nickname</string>
     <string name="register_btnRegister">Register</string>
     <string name="login_etConfirm">Confirm password</string>
@@ -28,4 +28,7 @@
     <string name="settings_btnChangePort">Change PORT</string>
     <string name="settings_btnChangeColor">change background color</string>
     <string name="settings_tvHeader">Settings</string>
+    <string name="login_no_account">Don\'t have an account? register</string>
+    <string name="chat_string">Chats</string>
+    <string name="BaseUrl">http://10.0.2.2:7290/api/</string>
 </resources>

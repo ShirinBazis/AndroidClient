@@ -12,7 +12,7 @@
         <item name="colorOnSecondary">@color/black</item>
 
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">#131313</item>
+        <item name="android:statusBarColor" >#131313</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

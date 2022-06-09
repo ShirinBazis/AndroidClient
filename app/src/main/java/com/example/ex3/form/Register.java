@@ -24,14 +24,14 @@ public class Register extends AppCompatActivity {
         // the button that will transfer to the login page
         Button btnGoToLogin = findViewById(R.id.btnGoToLogin);
         btnGoToLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(this, com.example.ex3.form.Login.class);
+            Intent intent = new Intent(this, Login.class);
             startActivity(intent);
         });
         btnRegister.setOnClickListener(v -> {
             // if all the necessary details correctly inserted, register the user
             isAllFieldsChecked = CheckAllFields();
             if (isAllFieldsChecked) {
-                Intent intent = new Intent(this, com.example.ex3.form.Login.class);
+                Intent intent = new Intent(this, Login.class);
                 startActivity(intent);
             }
         });

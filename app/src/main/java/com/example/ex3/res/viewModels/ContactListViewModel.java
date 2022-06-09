@@ -26,7 +26,7 @@ public class ContactListViewModel extends AndroidViewModel {
     }
 
     public void add(Contact contact) {
-        //    repository.add(contact);
+         repository.add(contact);
     }
 
     public void reload() {

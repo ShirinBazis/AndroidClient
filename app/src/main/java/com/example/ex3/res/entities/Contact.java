@@ -2,6 +2,7 @@ package com.example.ex3.res.entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -14,6 +15,15 @@ public class Contact {
     private String server;
     private String last;
     private String lastdate;
+    private String picture;
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 
     public Contact(@NonNull String id, String name, String server, String last, String lastdate) {
         this.id = id;
@@ -21,6 +31,13 @@ public class Contact {
         this.server = server;
         this.last = last;
         this.lastdate = lastdate;
+    }
+
+    @Ignore
+    public Contact(@NonNull String id, String name, String server) {
+        this.id = id;
+        this.name = name;
+        this.server = server;
     }
 
     @NonNull

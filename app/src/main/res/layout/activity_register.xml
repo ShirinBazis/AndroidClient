@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context="form.Login"
     android:orientation="vertical"
-    >
+    tools:context="form.Login">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,12 +36,12 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="casual"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.458"
-        tools:layout_editor_absoluteX="0dp"
-        android:fontFamily="casual">
+        tools:layout_editor_absoluteX="0dp">
 
         <EditText
             android:id="@+id/editTextUsername"
@@ -50,9 +49,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:backgroundTint="@color/white"
+            android:fontFamily="casual"
             android:hint="@string/login_etUsername"
-            android:inputType="textPersonName"
-            android:fontFamily="casual"/>
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editTextNickname"
@@ -60,9 +59,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:backgroundTint="@color/white"
+            android:fontFamily="casual"
             android:hint="@string/Register_etNickname"
-            android:inputType="textPersonName"
-            android:fontFamily="casual"/>
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editTextPassword"
@@ -70,9 +69,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:backgroundTint="#FFFFFF"
+            android:fontFamily="casual"
             android:hint="@string/login_etPassword"
-            android:inputType="textPassword"
-            android:fontFamily="casual"/>
+            android:inputType="textPassword" />
 
         <EditText
             android:id="@+id/editTextConfirmPassword"
@@ -80,9 +79,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:backgroundTint="#FFFFFF"
+            android:fontFamily="casual"
             android:hint="@string/login_etConfirm"
-            android:inputType="textPassword"
-            android:fontFamily="casual"/>
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/btnRegister"
@@ -122,8 +121,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="here"
-            android:fontFamily="casual"/>
+            android:fontFamily="casual"
+            android:text="here" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

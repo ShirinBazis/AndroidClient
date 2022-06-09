@@ -18,7 +18,7 @@ public interface ContactDao {
     Contact get(String id);
 
     @Insert
-    void insert(Contact... contacts);
+    void insert(Contact... contact);
 
     @Insert
     void insertList(List<Contact> contacts);

@@ -40,27 +40,31 @@ public class Register extends AppCompatActivity {
     private boolean CheckAllFields() {
         int flag = 0;
         if (etUsername.length() == 0) {
-            etUsername.setError("This field is required");
+            etUsername.setError("Username is required");
             flag = 1;
         }
         if (etNickname.length() == 0) {
-            etNickname.setError("This field is required");
+            etNickname.setError("Nickname is required");
             flag = 1;
         }
         if (etPassword.length() == 0) {
             etPassword.setError("Password is required");
             flag = 1;
         }
-        if (!etPassword.getText().toString().matches("^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]+$")) {
-            etPassword.setError("Password must contain letters and numbers");
-            flag = 1;
-        }
-        if (etPassword.length() < 8) {
-            etPassword.setError("Password must be minimum 8 characters");
-            flag = 1;
-        }
         if (etConfirm.length() == 0) {
             etConfirm.setError("You must confirm the password");
+            flag = 1;
+        }
+        if (!etUsername.getText().toString().matches("^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]+$")) {
+            etUsername.setError("Username must contains letters and numbers");
+            flag = 1;
+        }
+        if (!etPassword.getText().toString().matches("^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]+$")) {
+            etPassword.setError("Password must contains letters and numbers");
+            flag = 1;
+        }
+        else if (etPassword.length() < 4 || etPassword.length() > 20) {
+            etPassword.setError("Password must be between 4 to 20 characters");
             flag = 1;
         }
         else if (etPassword.getText().toString().equals(etConfirm.getText().toString())) {

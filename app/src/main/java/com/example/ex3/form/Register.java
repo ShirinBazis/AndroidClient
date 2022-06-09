@@ -64,7 +64,7 @@ public class Register extends AppCompatActivity {
             flag = 1;
         }
         else if (etPassword.getText().toString().equals(etConfirm.getText().toString())) {
-            etConfirm.setError("This field don't match the password");
+            etConfirm.setError("This field doesn't match the password");
             flag = 1;
         }
         return flag != 1;

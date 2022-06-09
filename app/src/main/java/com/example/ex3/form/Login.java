@@ -19,11 +19,10 @@ public class Login extends AppCompatActivity {
         // the button that will transfer to the register page
         Button btnGoToRegister = findViewById(R.id.btnGoToRegister);
         btnGoToRegister.setOnClickListener(v -> {
-            Intent intent = new Intent(this, Register.class);
-            startActivity(intent);
+            Intent toRegister = new Intent(this, Register.class);
+            // the button that will check whether the details of the user are correct
+            startActivity(toRegister);
         });
-        // the button that will check whether the details of the user are correct
-
     }
 
     private boolean CheckAllFields() {

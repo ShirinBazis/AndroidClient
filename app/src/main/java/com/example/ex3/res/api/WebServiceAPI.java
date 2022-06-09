@@ -1,6 +1,7 @@
 package com.example.ex3.res.api;
 
 import com.example.ex3.res.entities.Contact;
+import com.example.ex3.res.entities.Invitation;
 
 import java.util.List;
 
@@ -15,6 +16,9 @@ public interface WebServiceAPI {
 
     @POST("contacts")
     Call<Void> addContact(@Body Contact contact);
+
+    @POST("invitations")
+    Call<Void> sendInvitation(@Body Invitation invitation);
 
 //    @POST("contacts/{id}")
 //    Call<Void> addContact(@Path("id") int id);

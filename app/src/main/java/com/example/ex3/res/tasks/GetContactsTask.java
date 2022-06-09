@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.ex3.res.api.ContactAPI;
+import com.example.ex3.res.api.ContactsAPI;
 import com.example.ex3.res.dao.ContactDao;
 import com.example.ex3.res.entities.Contact;
 
@@ -21,8 +21,8 @@ public class GetContactsTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... voids) {
-        ContactAPI contactAPI = new ContactAPI(postListData, dao);
-        contactAPI.get();
+        ContactsAPI contactAPI = new ContactsAPI(postListData, dao);
+        contactAPI.getAllContact();
         return null;
     }
 }

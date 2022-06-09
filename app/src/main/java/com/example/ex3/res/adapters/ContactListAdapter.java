@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +15,7 @@ import com.example.ex3.R;
 import com.example.ex3.res.entities.Contact;
 
 import java.util.List;
+import java.util.Random;
 
 public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ContactListViewHolder> {
     class ContactListViewHolder extends RecyclerView.ViewHolder {
@@ -27,7 +29,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             tvDisplayName = itemView.findViewById(R.id.tvContactDisplayName);
             tvLast = itemView.findViewById(R.id.tvContactLastMessage);
             tvLastDate = itemView.findViewById(R.id.tvContactLastTime);
-            tvImage= itemView.findViewById(R.id.ivContactImage);
+            tvImage = itemView.findViewById(R.id.ivContactImage);
         }
     }
 
@@ -45,14 +47,37 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         return new ContactListViewHolder(itemView);
     }
 
+    private void setImage(ContactListAdapter.ContactListViewHolder holder) {
+        Random rand = new Random();
+        int range = 100;
+        int int_random = rand.nextInt(range);
+        switch (int_random % 4) {
+            case 0: {
+                holder.tvImage.setImageResource(R.drawable.avatar_1);
+                break;
+            }
+            case 1: {
+                holder.tvImage.setImageResource(R.drawable.avatar_2);
+                break;
+            }
+            case 2: {
+                holder.tvImage.setImageResource(R.drawable.avatar_3);
+                break;
+            }
+            default:
+                holder.tvImage.setImageResource(R.drawable.avatar_4);
+        }
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ContactListAdapter.ContactListViewHolder holder, int position) {
         if (contacts != null) {
             final Contact current = contacts.get(position);
             holder.tvDisplayName.setText(current.getName());
-            if(current.getLast()!=null){
-                String[] date = current.getLastdate().split("\\.",0);
-                String time = date[0].replace('T',' ');
+            setImage(holder);
+            if (current.getLast() != null) {
+                String[] date = current.getLastdate().split("\\.", 0);
+                String time = date[0].replace('T', ' ');
                 holder.tvLast.setText(current.getLast());
                 holder.tvLastDate.setText(time);
             }

@@ -46,24 +46,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
+            android:backgroundTint="#FFFFFF"
             android:ems="10"
             android:fontFamily="casual"
             android:hint="@string/login_etUsername"
             android:inputType="textPersonName"
-            android:textStyle="bold"
-            android:backgroundTint="#FFFFFF"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editTextTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
+            android:backgroundTint="#FFFFFF"
             android:ems="10"
             android:fontFamily="casual"
             android:hint="@string/login_etPassword"
             android:inputType="textPassword"
-            android:textStyle="bold"
-            android:backgroundTint="#FFFFFF"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnLogin"
@@ -90,20 +90,20 @@
             android:layout_height="wrap_content"
             android:fontFamily="casual"
             android:text="@string/login_no_account"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            android:textSize="20sp"/>
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <Button
             android:id="@+id/btnGoToRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/login_btnGoToRegister"
-            android:fontFamily="casual"/>
+            android:fontFamily="casual"
+            android:text="@string/login_btnGoToRegister" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

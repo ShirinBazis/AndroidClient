@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.ex3.AppDB;
+import com.example.ex3.res.api.CallbackListener;
 import com.example.ex3.res.api.ContactsAPI;
 import com.example.ex3.res.dao.ContactDao;
 import com.example.ex3.res.entities.Contact;
@@ -55,7 +56,7 @@ public class ContactRepository {
         return contactListData;
     }
 
-    public void add(Contact contact) {
-        new AddContactTask(contact, contactAPI).execute();
+    public void add(Contact contact , CallbackListener callbackListener) {
+        new AddContactTask(contact, dao, callbackListener).execute();
     }
 }

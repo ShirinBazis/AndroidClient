@@ -1,7 +1,5 @@
 package com.example.ex3.res.api;
 
-import android.widget.EditText;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
@@ -12,7 +10,6 @@ import com.example.ex3.res.entities.Contact;
 import com.example.ex3.res.entities.Invitation;
 
 import java.util.List;
-import java.util.concurrent.Executors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,7 +23,6 @@ public class ContactsAPI {
     Retrofit retrofit;
     WebServiceAPI webServiceAPI;
     private int res;
-    private Object lock1 = new Object();
 
     public int getRes() {
         return res;
@@ -42,8 +38,7 @@ public class ContactsAPI {
         this.res = 0;
         retrofit = new Retrofit.Builder()
                 .baseUrl(Ex3.context.getString(R.string.BaseUrl))
-                .addConverterFactory(GsonConverterFactory.create())
-                .callbackExecutor(Executors.newSingleThreadExecutor()).build();
+                .addConverterFactory(GsonConverterFactory.create()).build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }
 
@@ -65,7 +60,7 @@ public class ContactsAPI {
         });
     }
 
-    public void addContact(@NonNull Contact contact) {
+    public void addContact(@NonNull Contact contact, CallbackListener callbackListener) {
         Invitation invitation = new Invitation("leonardoR", contact.getId(), contact.getServer());
         Call<Void> callA = webServiceAPI.sendInvitation(invitation);
         callA.enqueue(new Callback<Void>() {
@@ -81,16 +76,21 @@ public class ContactsAPI {
                                     dao.insert(contact);
                                 }).start();
                             }
+                            callbackListener.onResponse(response.code());
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
+                            callbackListener.onFailure();
                         }
                     });
                 }
+                callbackListener.onResponse(response.code());
             }
+
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                callbackListener.onFailure();
             }
         });
     }

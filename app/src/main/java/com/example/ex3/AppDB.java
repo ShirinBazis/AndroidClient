@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.example.ex3.res.dao.ContactDao;
 import com.example.ex3.res.entities.Contact;
 
-@Database(entities = {Contact.class}, version = 2)
+@Database(entities = {Contact.class}, version = 1)
 public abstract class AppDB extends RoomDatabase {
     public abstract ContactDao contactDao();
 

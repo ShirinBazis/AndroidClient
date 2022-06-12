@@ -32,6 +32,7 @@ public class contactList extends AppCompatActivity {
 
         SwipeRefreshLayout refreshLayout = findViewById(R.id.refreshLayout);
         refreshLayout.setOnRefreshListener(() -> viewModel.reload());
+
         viewModel.get().observe(this, contacts -> {
             if (contacts.size() != 0) {
                 adapter.setContacts(contacts);

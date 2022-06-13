@@ -42,27 +42,38 @@ public class ContactsAPI {
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }
 
-    public void getAllContact() {
+    private WebServiceAPI contactWebService(String server) {
+        String url = "http://" + server + "/api/";
+        Retrofit tempRetrofit = new Retrofit.Builder()
+                .baseUrl(url).addConverterFactory(GsonConverterFactory.create()).build();
+        return tempRetrofit.create(WebServiceAPI.class);
+    }
+
+    public void getAllContact(CallbackListener callbackListener) {
         Call<List<Contact>> call = webServiceAPI.getContacts();
         call.enqueue(new Callback<List<Contact>>() {
             @Override
             public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
-                new Thread(() -> {
-                    dao.clear();
-                    dao.insertList(response.body());
-                    ContactListData.postValue(dao.getAll());
-                }).start();
+                if (response.code() == 200) {
+                    new Thread(() -> {
+                        dao.clear();
+                        dao.insertList(response.body());
+                        ContactListData.postValue(dao.getAll());
+                    }).start();
+                }
+                callbackListener.onResponse(response.code());
             }
 
             @Override
             public void onFailure(Call<List<Contact>> call, Throwable t) {
+                callbackListener.onFailure();
             }
         });
     }
 
     public void addContact(@NonNull Contact contact, CallbackListener callbackListener) {
         Invitation invitation = new Invitation("leonardoR", contact.getId(), contact.getServer());
-        Call<Void> callA = webServiceAPI.sendInvitation(invitation);
+        Call<Void> callA = contactWebService(contact.getServer()).sendInvitation(invitation);
         callA.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -84,8 +95,9 @@ public class ContactsAPI {
                             callbackListener.onFailure();
                         }
                     });
+                } else {
+                    callbackListener.onResponse(response.code());
                 }
-                callbackListener.onResponse(response.code());
             }
 
             @Override

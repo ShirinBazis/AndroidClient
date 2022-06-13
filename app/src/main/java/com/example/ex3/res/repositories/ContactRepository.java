@@ -1,6 +1,7 @@
 package com.example.ex3.res.repositories;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -12,6 +13,7 @@ import com.example.ex3.res.dao.ContactDao;
 import com.example.ex3.res.entities.Contact;
 import com.example.ex3.res.tasks.AddContactTask;
 import com.example.ex3.res.tasks.GetContactsTask;
+import com.example.ex3.userView.AddContact;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -19,23 +21,27 @@ import java.util.List;
 public class ContactRepository {
     private ContactDao dao;
     private ContactListData contactListData;
-    private final ContactsAPI contactAPI;
 
     public ContactRepository(Application application) {
         AppDB db = AppDB.getInstance(application);
         dao = db.contactDao();
-        contactListData = new ContactListData();
-        contactAPI = new ContactsAPI(contactListData, dao);
+        contactListData = new ContactListData(application);
     }
 
-    public void reload() {
-        new GetContactsTask(contactListData, dao).execute();
+    public void reload(CallbackListener callbackListener) {
+        if (callbackListener == null) {
+            callbackListener = CallbackListener.getDefault();
+        }
+        new GetContactsTask(contactListData, dao, callbackListener).execute();
     }
 
     class ContactListData extends MutableLiveData<List<Contact>> {
-        public ContactListData() {
+        Application application;
+
+        public ContactListData(Application application) {
             super();
             setValue(new LinkedList<>());
+            this.application = application;
         }
 
         @Override
@@ -45,7 +51,7 @@ public class ContactRepository {
             {
                 List<Contact> list = dao.getAll();
                 if (list.size() == 0) {
-                    reload();
+                    reload(null);
                 }
                 contactListData.postValue(list);
             }).start();
@@ -56,7 +62,7 @@ public class ContactRepository {
         return contactListData;
     }
 
-    public void add(Contact contact , CallbackListener callbackListener) {
+    public void add(Contact contact, CallbackListener callbackListener) {
         new AddContactTask(contact, dao, callbackListener).execute();
     }
 }

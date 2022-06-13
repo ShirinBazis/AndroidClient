@@ -32,7 +32,7 @@ public class ContactListViewModel extends AndroidViewModel {
         repository.add(contact, callbackListener);
     }
 
-    public void reload() {
-        repository.reload();
+    public void reload(CallbackListener callbackListener) {
+        repository.reload(callbackListener);
     }
 }

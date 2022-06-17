@@ -69,8 +69,8 @@ public class ContactsAPI {
         });
     }
 
-    public void addContact(@NonNull Contact contact, CallbackListener listener) {
-        Invitation invitation = new Invitation("leonardoR", contact.getId(), contact.getServer());
+    public void addContact(@NonNull Contact contact, CallbackListener listener, String username) {
+        Invitation invitation = new Invitation(username, contact.getId(), contact.getServer());
         Call<Void> callA = contactWebService(contact.getServer()).sendInvitation(invitation);
         callA.enqueue(new Callback<Void>() {
             @Override

@@ -3,14 +3,17 @@ package com.example.ex3.res.api;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.ex3.AppDB;
 import com.example.ex3.Ex3;
 import com.example.ex3.R;
 import com.example.ex3.res.dao.ContactDao;
+import com.example.ex3.res.dao.LoggedUserDao;
 import com.example.ex3.res.entities.Contact;
 import com.example.ex3.res.entities.Invitation;
 
 import java.util.List;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,14 +23,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ContactsAPI {
     private MutableLiveData<List<Contact>> ContactListData;
     private ContactDao dao;
-    Retrofit retrofit;
-    WebServiceAPI webServiceAPI;
+    private Retrofit retrofit;
+    private WebServiceAPI webServiceAPI;
 
-    public ContactsAPI(MutableLiveData<List<Contact>> contactListData, ContactDao dao) {
+    public ContactsAPI(MutableLiveData<List<Contact>> contactListData, ContactDao dao, String token) {
         this.ContactListData = contactListData;
         this.dao = dao;
         retrofit = new Retrofit.Builder()
-                .baseUrl(Ex3.context.getString(R.string.BaseUrl))
+                .baseUrl(Ex3.context.getString(R.string.BaseUrl)).client((
+                        new OkHttpClient.Builder()).addInterceptor(
+                        chain -> chain.proceed(chain.request().newBuilder()
+                                .addHeader("Authorization", "Bearer " + token).build())).build())
                 .addConverterFactory(GsonConverterFactory.create()).build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }

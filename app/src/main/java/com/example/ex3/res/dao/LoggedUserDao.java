@@ -19,9 +19,6 @@ public interface LoggedUserDao {
     @Query("SELECT * FROM loggeduser WHERE username = :username")
     LoggedUser get(String username);
 
-    @Query("SELECT token FROM loggeduser WHERE id = 0")
-    String getToken();
-
     @Insert
     void insert(LoggedUser... loggedUser);
 

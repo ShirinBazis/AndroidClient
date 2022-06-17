@@ -15,10 +15,10 @@ public class AddContactTask extends AsyncTask<Void, Void, Void> {
     private CallbackListener callbackListener;
     private ContactsAPI contactAPI;
 
-    public AddContactTask(Contact contact, ContactDao dao, CallbackListener listener) {
+    public AddContactTask(Contact contact, ContactDao dao, CallbackListener listener, String token) {
         this.contact = contact;
         this.callbackListener = listener;
-        this.contactAPI = new ContactsAPI(null, dao);
+        this.contactAPI = new ContactsAPI(null, dao, token);
     }
 
     @Override

@@ -7,7 +7,6 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Contact {
-
     @NonNull
     @PrimaryKey
     private String id;

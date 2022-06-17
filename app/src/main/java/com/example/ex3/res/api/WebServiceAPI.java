@@ -1,10 +1,14 @@
 package com.example.ex3.res.api;
 
+import android.util.JsonReader;
+
 import com.example.ex3.res.entities.Contact;
 import com.example.ex3.res.entities.Invitation;
+import com.example.ex3.res.entities.User;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -19,6 +23,9 @@ public interface WebServiceAPI {
 
     @POST("invitations")
     Call<Void> sendInvitation(@Body Invitation invitation);
+
+    @POST("users/Login")
+    Call<ResponseBody> login(@Body User user);
 
 //    @POST("contacts/{id}")
 //    Call<Void> addContact(@Path("id") int id);

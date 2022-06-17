@@ -28,11 +28,11 @@ public class ContactListViewModel extends AndroidViewModel {
         return contacts;
     }
 
-    public void add(Contact contact, CallbackListener callbackListener) {
-        repository.add(contact, callbackListener);
+    public void add(Contact contact, CallbackListener listener) {
+        repository.add(contact, listener);
     }
 
-    public void reload(CallbackListener callbackListener) {
-        repository.reload(callbackListener);
+    public void reload(CallbackListener listener) {
+        repository.reload(listener);
     }
 }

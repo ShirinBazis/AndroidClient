@@ -37,4 +37,5 @@
     <string name="tvEntrSrvr">Enter Server</string>
     <string name="add_now">Add Now</string>
     <string name="contact_img">Contact Img</string>
+    <string name="cant_reach">Can\'t reach server</string>
 </resources>

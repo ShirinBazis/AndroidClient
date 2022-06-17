@@ -31,8 +31,7 @@ public class Register extends AppCompatActivity {
             // if all the necessary details correctly inserted, register the user
             isAllFieldsChecked = CheckAllFields();
             if (isAllFieldsChecked) {
-                Intent intent = new Intent(this, Login.class);
-                startActivity(intent);
+                finish();
             }
         });
     }

@@ -18,18 +18,20 @@ import java.util.List;
 public class ContactRepository {
     private ContactDao dao;
     private ContactListData contactListData;
+    private String token;
 
     public ContactRepository(Application application) {
         AppDB db = AppDB.getInstance(application);
         dao = db.contactDao();
         contactListData = new ContactListData(application);
+        this.token = db.loggedUserDao().getAll().get(0).getToken();
     }
 
     public void reload(CallbackListener listener) {
         if (listener == null) {
             listener = CallbackListener.getDefault();
         }
-        new GetContactsTask(contactListData, dao, listener).execute();
+        new GetContactsTask(contactListData, dao, listener, token).execute();
     }
 
     class ContactListData extends MutableLiveData<List<Contact>> {
@@ -60,6 +62,6 @@ public class ContactRepository {
     }
 
     public void add(Contact contact, CallbackListener listener) {
-        new AddContactTask(contact, dao, listener).execute();
+        new AddContactTask(contact, dao, listener, token).execute();
     }
 }

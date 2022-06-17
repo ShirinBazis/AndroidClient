@@ -1,7 +1,6 @@
 package com.example.ex3.form;
 
 import com.example.ex3.res.api.CallbackListener;
-import com.example.ex3.res.entities.LoggedUser;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -21,7 +20,6 @@ import android.widget.Toast;
 
 
 public class Login extends AppCompatActivity {
-    boolean isAllFieldsChecked = false;
     EditText etUsername, etPassword;
     private LoginViewModel viewModel;
 
@@ -63,10 +61,8 @@ public class Login extends AppCompatActivity {
         });
 
         btnLogin.setOnClickListener(v -> {
-            // if all the necessary details correctly inserted, register the user
-            isAllFieldsChecked = CheckLoginFields();
+            // if all the necessary details correctly inserted, log the user in
             if (CheckLoginFields()) {
-                LoggedUser loggedUser = new LoggedUser(etUsername.getText().toString());
                 User user = new User(etUsername.getText().toString(), etPassword.getText().toString());
                 viewModel.Login(user, getListener(this));
             }
@@ -83,14 +79,6 @@ public class Login extends AppCompatActivity {
             etPassword.setError("Password is required");
             flag = 1;
         }
-
-        //check if this user really exists
-        //check if this is the right password of the user
-
-//        else if (etPassword.getText().toString().equals(etConfirm.getText().toString())) {
-//            etConfirm.setError("This field doesn't match the password");
-//            flag = 1;
-//        }
         return flag != 1;
     }
 }

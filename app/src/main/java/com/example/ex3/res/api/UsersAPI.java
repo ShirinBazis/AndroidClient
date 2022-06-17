@@ -1,12 +1,9 @@
 package com.example.ex3.res.api;
 
-import android.util.JsonReader;
-
 import com.example.ex3.Ex3;
 import com.example.ex3.R;
 import com.example.ex3.res.dao.ContactDao;
 import com.example.ex3.res.dao.LoggedUserDao;
-import com.example.ex3.res.entities.Contact;
 import com.example.ex3.res.entities.LoggedUser;
 import com.example.ex3.res.entities.User;
 import com.example.ex3.res.entities.NewUser;
@@ -25,8 +22,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class UsersAPI {
     private ContactDao contactDao;
     private LoggedUserDao loggedUserDao;
-    Retrofit retrofit;
-    WebServiceAPI webServiceAPI;
+    private Retrofit retrofit;
+    private WebServiceAPI webServiceAPI;
 
     public UsersAPI(ContactDao contactDao, LoggedUserDao loggedUserDao) {
         this.contactDao = contactDao;
@@ -48,15 +45,19 @@ public class UsersAPI {
                     try {
                         assert response.body() != null;
                         temp.setToken(response.body().string());
-                        if (list.size() != 0 && !Objects.equals(list.get(0).getUsername(), user.getUsername())) {
-                            contactDao.clear();
-                            loggedUserDao.clear();
-                        } else if (list.size() != 0) {
-                            list.get(0).setToken(temp.getToken());
-                            loggedUserDao.update(list.get(0));
-                        } else {
+                        if (list.size() == 0) {
                             loggedUserDao.insert(temp);
+                        } else {
+                            if (!Objects.equals(list.get(0).getUsername(), user.getUsername())) {
+                                contactDao.clear();
+                                loggedUserDao.clear();
+                                loggedUserDao.insert(temp);
+                            } else if (list.size() != 0) {
+                                list.get(0).setToken(temp.getToken());
+                                loggedUserDao.update(list.get(0));
+                            }
                         }
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

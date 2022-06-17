@@ -12,24 +12,29 @@ import com.example.ex3.res.entities.Contact;
 import com.example.ex3.res.tasks.AddContactTask;
 import com.example.ex3.res.tasks.GetContactsTask;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ContactRepository {
     private ContactDao dao;
     private ContactListData contactListData;
+    private List<String> args;
 
     public ContactRepository(Application application) {
         AppDB db = AppDB.getInstance(application);
         dao = db.contactDao();
         contactListData = new ContactListData(application);
+        args = new ArrayList<>();
+        this.args.add(db.loggedUserDao().getAll().get(0).getUsername());
+        this.args.add(db.loggedUserDao().getAll().get(0).getToken());
     }
 
     public void reload(CallbackListener listener) {
         if (listener == null) {
             listener = CallbackListener.getDefault();
         }
-        new GetContactsTask(contactListData, dao, listener).execute();
+        new GetContactsTask(contactListData, dao, listener, args.get(1)).execute();
     }
 
     class ContactListData extends MutableLiveData<List<Contact>> {
@@ -60,6 +65,6 @@ public class ContactRepository {
     }
 
     public void add(Contact contact, CallbackListener listener) {
-        new AddContactTask(contact, dao, listener).execute();
+        new AddContactTask(contact, dao, listener, args).execute();
     }
 }

@@ -15,9 +15,10 @@ public class GetContactsTask extends AsyncTask<Void, Void, Void> {
     private CallbackListener callbackListener;
     private ContactsAPI contactAPI;
 
-    public GetContactsTask(MutableLiveData<List<Contact>> postListData, ContactDao dao, CallbackListener listener) {
+    public GetContactsTask(MutableLiveData<List<Contact>> postListData, ContactDao dao,
+                           CallbackListener listener, String token) {
         this.callbackListener = listener;
-        this.contactAPI = new ContactsAPI(postListData, dao);
+        this.contactAPI = new ContactsAPI(postListData, dao, token);
     }
 
     @Override

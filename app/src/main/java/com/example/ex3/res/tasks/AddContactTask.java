@@ -13,17 +13,16 @@ public class AddContactTask extends AsyncTask<Void, Void, Void> {
 
     private Contact contact;
     private CallbackListener callbackListener;
-    private ContactDao dao;
+    private ContactsAPI contactAPI;
 
     public AddContactTask(Contact contact, ContactDao dao, CallbackListener listener) {
         this.contact = contact;
-        this.dao = dao;
         this.callbackListener = listener;
+        this.contactAPI = new ContactsAPI(null, dao);
     }
 
     @Override
     protected Void doInBackground(Void... voids) {
-        ContactsAPI contactAPI = new ContactsAPI(null, dao);
         contactAPI.addContact(contact, callbackListener);
         return null;
     }

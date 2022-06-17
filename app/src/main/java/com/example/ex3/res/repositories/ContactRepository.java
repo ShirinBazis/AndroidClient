@@ -1,19 +1,16 @@
 package com.example.ex3.res.repositories;
 
 import android.app.Application;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.ex3.AppDB;
 import com.example.ex3.res.api.CallbackListener;
-import com.example.ex3.res.api.ContactsAPI;
 import com.example.ex3.res.dao.ContactDao;
 import com.example.ex3.res.entities.Contact;
 import com.example.ex3.res.tasks.AddContactTask;
 import com.example.ex3.res.tasks.GetContactsTask;
-import com.example.ex3.userView.AddContact;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,11 +25,11 @@ public class ContactRepository {
         contactListData = new ContactListData(application);
     }
 
-    public void reload(CallbackListener callbackListener) {
-        if (callbackListener == null) {
-            callbackListener = CallbackListener.getDefault();
+    public void reload(CallbackListener listener) {
+        if (listener == null) {
+            listener = CallbackListener.getDefault();
         }
-        new GetContactsTask(contactListData, dao, callbackListener).execute();
+        new GetContactsTask(contactListData, dao, listener).execute();
     }
 
     class ContactListData extends MutableLiveData<List<Contact>> {
@@ -62,7 +59,7 @@ public class ContactRepository {
         return contactListData;
     }
 
-    public void add(Contact contact, CallbackListener callbackListener) {
-        new AddContactTask(contact, dao, callbackListener).execute();
+    public void add(Contact contact, CallbackListener listener) {
+        new AddContactTask(contact, dao, listener).execute();
     }
 }

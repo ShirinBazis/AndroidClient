@@ -22,20 +22,10 @@ public class ContactsAPI {
     private ContactDao dao;
     Retrofit retrofit;
     WebServiceAPI webServiceAPI;
-    private int res;
-
-    public int getRes() {
-        return res;
-    }
-
-    public void setRes(int res) {
-        this.res = res;
-    }
 
     public ContactsAPI(MutableLiveData<List<Contact>> contactListData, ContactDao dao) {
         this.ContactListData = contactListData;
         this.dao = dao;
-        this.res = 0;
         retrofit = new Retrofit.Builder()
                 .baseUrl(Ex3.context.getString(R.string.BaseUrl))
                 .addConverterFactory(GsonConverterFactory.create()).build();
@@ -49,7 +39,7 @@ public class ContactsAPI {
         return tempRetrofit.create(WebServiceAPI.class);
     }
 
-    public void getAllContact(CallbackListener callbackListener) {
+    public void getAllContact(CallbackListener listener) {
         Call<List<Contact>> call = webServiceAPI.getContacts();
         call.enqueue(new Callback<List<Contact>>() {
             @Override
@@ -59,19 +49,21 @@ public class ContactsAPI {
                         dao.clear();
                         dao.insertList(response.body());
                         ContactListData.postValue(dao.getAll());
+                        listener.onResponse(response.code());
                     }).start();
+                } else {
+                    listener.onResponse(response.code());
                 }
-                callbackListener.onResponse(response.code());
             }
 
             @Override
             public void onFailure(Call<List<Contact>> call, Throwable t) {
-                callbackListener.onFailure();
+                listener.onFailure();
             }
         });
     }
 
-    public void addContact(@NonNull Contact contact, CallbackListener callbackListener) {
+    public void addContact(@NonNull Contact contact, CallbackListener listener) {
         Invitation invitation = new Invitation("leonardoR", contact.getId(), contact.getServer());
         Call<Void> callA = contactWebService(contact.getServer()).sendInvitation(invitation);
         callA.enqueue(new Callback<Void>() {
@@ -87,22 +79,22 @@ public class ContactsAPI {
                                     dao.insert(contact);
                                 }).start();
                             }
-                            callbackListener.onResponse(response.code());
+                            listener.onResponse(response.code());
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            callbackListener.onFailure();
+                            listener.onFailure();
                         }
                     });
                 } else {
-                    callbackListener.onResponse(response.code());
+                    listener.onResponse(response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                callbackListener.onFailure();
+                listener.onFailure();
             }
         });
     }

@@ -42,7 +42,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/etLoginUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
@@ -54,7 +54,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/etLoginPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
@@ -63,7 +63,8 @@
             android:fontFamily="casual"
             android:hint="@string/login_etPassword"
             android:inputType="textPassword"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:autofillHints="Password" />
 
         <Button
             android:id="@+id/btnLogin"
@@ -74,6 +75,7 @@
             android:fontFamily="casual"
             android:text="@string/login_btnLogin"
             android:textStyle="bold" />
+
     </LinearLayout>
 
     <LinearLayout

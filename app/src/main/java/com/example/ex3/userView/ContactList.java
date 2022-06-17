@@ -16,8 +16,10 @@ import com.example.ex3.res.api.CallbackListener;
 import com.example.ex3.res.viewModels.ContactListViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class contactList extends AppCompatActivity {
+
+public class ContactList extends AppCompatActivity {
     private ContactListViewModel viewModel;
 
     private CallbackListener getListener(SwipeRefreshLayout refreshLayout) {
@@ -25,14 +27,14 @@ public class contactList extends AppCompatActivity {
             @Override
             public void onResponse(int code) {
                 if (code != 200) {
-                    Toast.makeText(contactList.this, "Couldn't get contacts", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ContactList.this, "Couldn't get contacts", Toast.LENGTH_SHORT).show();
                 }
                 refreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure() {
-                Toast.makeText(contactList.this, "Can't reach server", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ContactList.this, R.string.cant_reach, Toast.LENGTH_SHORT).show();
                 refreshLayout.setRefreshing(false);
             }
         };
@@ -40,6 +42,7 @@ public class contactList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AtomicInteger flag = new AtomicInteger();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
         viewModel = new ViewModelProvider(this).get(ContactListViewModel.class);
@@ -54,16 +57,13 @@ public class contactList extends AppCompatActivity {
 
         viewModel.get().observe(this, contacts -> {
             if (contacts.size() != 0) {
-                adapter.setContacts(contacts);
                 refreshLayout.setRefreshing(false);
             }
-            else {
-                viewModel.reload(getListener(refreshLayout));
-            }
+            adapter.setContacts(contacts);
         });
 
         FloatingActionButton addContactBtn = findViewById(R.id.btnContactList);
-        addContactBtn.setOnClickListener((v) -> {
+        addContactBtn.setOnClickListener(v -> {
             Intent i = new Intent(this, AddContact.class);
             startActivity(i);
         });

@@ -7,11 +7,15 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.ex3.res.dao.ContactDao;
+import com.example.ex3.res.dao.LoggedUserDao;
 import com.example.ex3.res.entities.Contact;
+import com.example.ex3.res.entities.LoggedUser;
 
-@Database(entities = {Contact.class}, version = 1)
+@Database(entities = {Contact.class, LoggedUser.class}, version = 1)
 public abstract class AppDB extends RoomDatabase {
     public abstract ContactDao contactDao();
+
+    public abstract LoggedUserDao loggedUserDao();
 
     private static volatile AppDB appDB;
 
@@ -20,7 +24,7 @@ public abstract class AppDB extends RoomDatabase {
             synchronized (AppDB.class) {
                 if (appDB == null) {
                     appDB = Room.databaseBuilder(context.getApplicationContext(), AppDB.class, "app_db")
-                            .fallbackToDestructiveMigration().build();
+                            .fallbackToDestructiveMigration().allowMainThreadQueries().build();
                 }
             }
         }

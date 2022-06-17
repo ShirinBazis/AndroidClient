@@ -23,7 +23,7 @@
             android:name=".form.Settings"
             android:exported="false" />
         <activity
-            android:name=".userView.contactList"
+            android:name=".userView.ContactList"
             android:exported="false" />
         <activity
             android:name=".form.Register"
@@ -33,7 +33,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

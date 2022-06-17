@@ -62,23 +62,23 @@ public class Login extends AppCompatActivity {
 
         btnLogin.setOnClickListener(v -> {
             // if all the necessary details correctly inserted, log the user in
-            if (CheckLoginFields()) {
+            if (areLoginFieldsValid()) {
                 User user = new User(etUsername.getText().toString(), etPassword.getText().toString());
                 viewModel.Login(user, getListener(this));
             }
         });
     }
 
-    private boolean CheckLoginFields() {
-        int flag = 0;
+    private boolean areLoginFieldsValid() {
+        int error = 0;
         if (etUsername.length() == 0) {
             etUsername.setError("Username is required");
-            flag = 1;
+            error = 1;
         }
         if (etPassword.length() == 0) {
             etPassword.setError("Password is required");
-            flag = 1;
+            error = 1;
         }
-        return flag != 1;
+        return error == 0;
     }
 }

@@ -64,51 +64,51 @@ public class Register extends AppCompatActivity {
         });
         btnRegister.setOnClickListener(v -> {
             // if all the necessary details correctly inserted, register the user
-            if (CheckAllFields()) {
+            if (areRegisterFieldsValid()) {
                 NewUser newUser = new NewUser(etUsername.getText().toString(),etNickname.getText().toString(), etPassword.getText().toString());
                 viewModel.Register(newUser, getListener(newUser));
             }
         });
     }
 
-    private boolean CheckAllFields() {
-        int flag = 0;
+    private boolean areRegisterFieldsValid() {
+        int error = 0;
         if (etUsername.length() == 0) {
             etUsername.setError("Username is required");
-            flag = 1;
+            error = 1;
         }
         if (etNickname.length() == 0) {
             etNickname.setError("Nickname is required");
-            flag = 1;
+            error = 1;
         }
         if (etPassword.length() == 0) {
             etPassword.setError("Password is required");
-            flag = 1;
+            error = 1;
         }
         if (etConfirm.length() == 0) {
-            etConfirm.setError("You must confirm the password");
-            flag = 1;
+            etConfirm.setError("Password confirm is required");
+            error = 1;
         }
         if (!etUsername.getText().toString().matches("^(?=.*[a-zA-Z])[a-zA-Z]+$")) {
             etUsername.setError("Username must be without spaces and include letters too");
-            flag = 1;
+            error = 1;
         }
         if (!etNickname.getText().toString().matches("^(?=.*[a-zA-Z])[a-zA-Z]+$")) {
             etNickname.setError("Nickname must be without spaces and include letters too");
-            flag = 1;
+            error = 1;
         }
         if (!etPassword.getText().toString().matches("^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]+$")) {
-            etPassword.setError("Password must contains letters and numbers");
-            flag = 1;
+            etPassword.setError("Password must contain letters and numbers");
+            error = 1;
         }
         else if (etPassword.length() < 4 || etPassword.length() > 20) {
             etPassword.setError("Password must be between 4 to 20 characters");
-            flag = 1;
+            error = 1;
         }
         else if (!etPassword.getText().toString().equals(etConfirm.getText().toString())) {
-            etConfirm.setError("This field doesn't match the password");
-            flag = 1;
+            etConfirm.setError("This password is different from the previous one");
+            error = 1;
         }
-        return flag != 1;
+        return error == 0;
     }
 }

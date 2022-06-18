@@ -17,6 +17,7 @@ import com.example.ex3.res.viewModels.ContactListViewModel;
 
 public class AddContact extends AppCompatActivity {
     private ContactListViewModel viewModel;
+    EditText etUsername, etNickname, etServer;
 
     private CallbackListener getListener(Contact newContact) {
         return new CallbackListener() {
@@ -37,20 +38,36 @@ public class AddContact extends AppCompatActivity {
         };
     }
 
+    private boolean CheckLoginFields() {
+        int flag = 0;
+        if (etUsername.length() == 0) {
+            etUsername.setError("Username is required");
+            flag = 1;
+        }
+        if (etNickname.length() == 0) {
+            etNickname.setError("Nickname is required");
+            flag = 1;
+        }
+        if (etServer.length() == 0) {
+            etServer.setError("Server is required");
+            flag = 1;
+        }
+        return flag != 1;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
 
         viewModel = new ViewModelProvider(this).get(ContactListViewModel.class);
-        EditText etUsername, etNickname, etServer;
         etUsername = findViewById(R.id.etAddContactUsr);
         etNickname = findViewById(R.id.etAddContactNick);
         etServer = findViewById(R.id.etAddContactSrvr);
         Button addBtn = findViewById(R.id.btnAddContact);
 
         addBtn.setOnClickListener(v -> {
-            if (etUsername.length() != 0 && etNickname.length() != 0 && etServer.length() != 0) {
+            if (CheckLoginFields()) {
                 Contact newContact = new Contact(etUsername.getText().toString(),
                         etNickname.getText().toString(), etServer.getText().toString());
                 viewModel.add(newContact, getListener(newContact));

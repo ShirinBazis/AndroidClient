@@ -51,7 +51,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         Random rand = new Random();
         int range = 100;
         int int_random = rand.nextInt(range);
-        switch (int_random % 4) {
+        switch (int_random % 6) {
             case 0: {
                 holder.tvImage.setImageResource(R.drawable.avatar_1);
                 break;
@@ -64,8 +64,16 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
                 holder.tvImage.setImageResource(R.drawable.avatar_3);
                 break;
             }
-            default:
+            case 3: {
                 holder.tvImage.setImageResource(R.drawable.avatar_4);
+                break;
+            }
+            case 4: {
+                holder.tvImage.setImageResource(R.drawable.avatar_5);
+                break;
+            }
+            default:
+                holder.tvImage.setImageResource(R.drawable.avatar_6);
         }
     }
 

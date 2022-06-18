@@ -30,6 +30,7 @@ public class Login extends AppCompatActivity {
                 if (code == 200) {
                     Intent intent = new Intent(context, ContactList.class);
                     startActivity(intent);
+                    // the user doesn't exist or the password is wrong
                 } else {
                     Toast.makeText(Login.this, "Wrong password or username", Toast.LENGTH_LONG).show();
                 }
@@ -46,7 +47,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         // the button that will check whether the details of the user are correct
         Button btnLogin = findViewById(R.id.btnLogin);
         // the button that will transfer to the register page

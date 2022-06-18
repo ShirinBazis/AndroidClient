@@ -4,6 +4,7 @@ import android.util.JsonReader;
 
 import com.example.ex3.res.entities.Contact;
 import com.example.ex3.res.entities.Invitation;
+import com.example.ex3.res.entities.NewUser;
 import com.example.ex3.res.entities.User;
 
 import java.util.List;
@@ -26,6 +27,9 @@ public interface WebServiceAPI {
 
     @POST("users/Login")
     Call<ResponseBody> login(@Body User user);
+
+    @POST("users/Register")
+    Call<Void> register(@Body NewUser newUser);
 
 //    @POST("contacts/{id}")
 //    Call<Void> addContact(@Path("id") int id);

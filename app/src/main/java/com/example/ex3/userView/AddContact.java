@@ -24,6 +24,7 @@ public class AddContact extends AppCompatActivity {
             @Override
             public void onResponse(int code) {
                 if (code == 201) {
+                    //pass to the previous page
                     finish();
                     Toast.makeText(Ex3.context, "Successfully added " + newContact.getName(), Toast.LENGTH_SHORT).show();
                 } else {

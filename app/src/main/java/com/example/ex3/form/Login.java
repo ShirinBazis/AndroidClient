@@ -11,7 +11,7 @@ import android.os.Bundle;
 import com.example.ex3.R;
 import com.example.ex3.res.entities.User;
 import com.example.ex3.res.viewModels.LoginViewModel;
-import com.example.ex3.userView.ContactList;
+import com.example.ex3.userView.MainActivity;
 
 import android.content.Intent;
 import android.widget.Button;
@@ -28,10 +28,10 @@ public class Login extends AppCompatActivity {
             @Override
             public void onResponse(int code) {
                 if (code == 200) {
-                    Intent intent = new Intent(context, ContactList.class);
+                    Intent intent = new Intent(context, MainActivity.class);
                     startActivity(intent);
-                    // the user doesn't exist or the password is wrong
                 } else {
+                    // the user doesn't exist or the password is wrong
                     Toast.makeText(Login.this, "Wrong password or username", Toast.LENGTH_LONG).show();
                 }
             }

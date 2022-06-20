@@ -1,10 +1,8 @@
 package com.example.ex3.form;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -14,12 +12,8 @@ import android.widget.Toast;
 import com.example.ex3.Ex3;
 import com.example.ex3.R;
 import com.example.ex3.res.api.CallbackListener;
-import com.example.ex3.res.entities.Contact;
 import com.example.ex3.res.entities.NewUser;
-import com.example.ex3.res.entities.User;
-import com.example.ex3.res.viewModels.LoginViewModel;
 import com.example.ex3.res.viewModels.RegisterViewModel;
-import com.example.ex3.userView.ContactList;
 
 public class Register extends AppCompatActivity {
 

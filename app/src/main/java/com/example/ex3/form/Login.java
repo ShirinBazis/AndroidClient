@@ -51,6 +51,8 @@ public class Login extends AppCompatActivity {
         Button btnLogin = findViewById(R.id.btnLogin);
         // the button that will transfer to the register page
         Button btnGoToRegister = findViewById(R.id.btnGoToRegister);
+
+        Button btnSetings = findViewById(R.id.btnSettings);
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         etUsername = findViewById(R.id.etLoginUsername);
         etPassword = findViewById(R.id.etLoginPassword);
@@ -66,6 +68,11 @@ public class Login extends AppCompatActivity {
                 User user = new User(etUsername.getText().toString(), etPassword.getText().toString());
                 viewModel.Login(user, getListener(this));
             }
+        });
+
+        btnSetings.setOnClickListener(v -> {
+            Intent i = new Intent(this, Settings.class);
+            startActivity(i);
         });
     }
 

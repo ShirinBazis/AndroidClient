@@ -25,9 +25,6 @@ public interface LoggedUserDao {
     @Update
     void update(LoggedUser... loggedUser);
 
-    //@Delete
-    //  void delete(Post... posts);
-
     @Query("DELETE FROM loggedUser")
     void clear();
 }

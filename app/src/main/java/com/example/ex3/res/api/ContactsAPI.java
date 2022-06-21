@@ -29,8 +29,9 @@ public class ContactsAPI {
     public ContactsAPI(MutableLiveData<List<Contact>> contactListData, ContactDao dao, String token) {
         this.ContactListData = contactListData;
         this.dao = dao;
+        String server = (AppDB.getInstance(Ex3.context).loggedUserDao()).getAll().get(0).getServer();
         retrofit = new Retrofit.Builder()
-                .baseUrl(Ex3.context.getString(R.string.BaseUrl)).client((
+                .baseUrl("http://" + server + "/api/").client((
                         new OkHttpClient.Builder()).addInterceptor(
                         chain -> chain.proceed(chain.request().newBuilder()
                                 .addHeader("Authorization", "Bearer " + token).build())).build())

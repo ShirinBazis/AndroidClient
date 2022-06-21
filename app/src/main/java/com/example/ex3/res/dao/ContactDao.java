@@ -23,12 +23,6 @@ public interface ContactDao {
     @Insert
     void insertList(List<Contact> contacts);
 
-    //@Update
-    //void update(Post... posts);
-
-    //@Delete
-    //  void delete(Post... posts);
-
     @Query("DELETE FROM contact")
     void clear();
 }

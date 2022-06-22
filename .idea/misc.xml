@@ -4,19 +4,23 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android/project/AndroidClient/app/src/main/res/drawable-anydpi/ic_add_contact.xml" value="0.3785" />
+        <entry key="..\:/Android/project/AndroidClient/app/src/main/res/drawable-anydpi/ic_settings.xml" value="0.3425" />
         <entry key="..\:/Android/project/AndroidClient/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.143" />
+        <entry key="..\:/Android/project/AndroidClient/app/src/main/res/drawable-xhdpi/dark_gradient_background.xml" value="0.3995" />
         <entry key="..\:/Android/project/AndroidClient/app/src/main/res/drawable/gradient_background.xml" value="0.213" />
         <entry key="..\:/Android/project/AndroidClient/app/src/main/res/drawable/ic_launcher_background.xml" value="0.143" />
         <entry key="..\:/Android/project/AndroidClient/app/src/main/res/drawable/round_corners.xml" value="0.1675" />
         <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout-v31/activity_add_contact.xml" value="0.5192708333333333" />
         <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout/activity_add_contact.xml" value="0.25" />
+        <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout/activity_change_server.xml" value="0.1" />
+        <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout/activity_change_theme.xml" value="0.5" />
         <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout/activity_chat_view.xml" value="0.33" />
-        <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout/activity_contact_list.xml" value="0.1" />
-        <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout/activity_login.xml" value="0.2177121771217712" />
+        <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout/activity_contact_list.xml" value="0.33" />
+        <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout/activity_potrait_view.xml" value="0.1917255297679112" />
         <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout/activity_register.xml" value="0.15206185567010308" />
-        <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout/activity_settings.xml" value="0.37395833333333334" />
+        <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout/activity_settings.xml" value="0.1" />
         <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout/contact_layout.xml" value="0.5" />
         <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout/content_main.xml" value="0.5192708333333333" />
         <entry key="..\:/Android/project/AndroidClient/app/src/main/res/layout/frag1_layout.xml" value="0.19147325933400605" />

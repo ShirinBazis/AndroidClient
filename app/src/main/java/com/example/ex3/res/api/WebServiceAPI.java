@@ -1,7 +1,5 @@
 package com.example.ex3.res.api;
 
-import android.util.JsonReader;
-
 import com.example.ex3.res.entities.Contact;
 import com.example.ex3.res.entities.Invitation;
 import com.example.ex3.res.entities.NewUser;

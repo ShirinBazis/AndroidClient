@@ -1,5 +1,6 @@
 package com.example.ex3.form;
 
+import com.example.ex3.Ex3;
 import com.example.ex3.res.api.CallbackListener;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 public class Login extends AppCompatActivity {
     EditText etUsername, etPassword;
     private LoginViewModel viewModel;
+    private int flag = Ex3.theme;
 
     private CallbackListener getListener(Context context) {
         return new CallbackListener() {
@@ -43,15 +45,12 @@ public class Login extends AppCompatActivity {
         };
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    private void startUtill() {
         // the button that will check whether the details of the user are correct
         Button btnLogin = findViewById(R.id.btnLogin);
         // the button that will transfer to the register page
         Button btnGoToRegister = findViewById(R.id.btnGoToRegister);
-
+        // the button that will check whether the details of the user are correct
         Button btnSetings = findViewById(R.id.btnSettings);
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         etUsername = findViewById(R.id.etLoginUsername);
@@ -76,6 +75,23 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        if (Ex3.theme == 0) {
+            setTheme(R.style.darkTheme_Ex3);
+        } else {
+            setTheme(R.style.Theme_Ex3);
+        }
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        if (Ex3.theme == 0) {
+            findViewById(R.id.loginBkg).setBackgroundResource(R.drawable.dark_gradient_background);
+        } else {
+            findViewById(R.id.loginBkg).setBackgroundResource(R.drawable.gradient_background);
+        }
+        startUtill();
+    }
+
     private boolean areLoginFieldsValid() {
         int error = 0;
         if (etUsername.length() == 0) {
@@ -87,5 +103,19 @@ public class Login extends AppCompatActivity {
             error = 1;
         }
         return error == 0;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (flag != Ex3.theme) {
+            flag = Ex3.theme;
+            if (Ex3.theme == 0) {
+                findViewById(R.id.loginBkg).setBackgroundResource(R.drawable.dark_gradient_background);
+            } else {
+                findViewById(R.id.loginBkg).setBackgroundResource(R.drawable.gradient_background);
+            }
+            startUtill();
+        }
     }
 }

@@ -58,8 +58,19 @@ public class AddContact extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        if (Ex3.theme == 0) {
+            setTheme(R.style.darkTheme_Ex3);
+        } else {
+            setTheme(R.style.Theme_Ex3);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
+        if (Ex3.theme == 0) {
+            findViewById(R.id.addContactBkg).setBackgroundResource(R.drawable.dark_gradient_background);
+        } else {
+            findViewById(R.id.addContactBkg).setBackgroundResource(R.drawable.gradient_background);
+        }
 
         viewModel = new ViewModelProvider(this).get(ContactListViewModel.class);
         etUsername = findViewById(R.id.etAddContactUsr);

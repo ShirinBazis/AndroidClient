@@ -30,7 +30,7 @@
     <string name="settings_tvHeader">Settings</string>
     <string name="login_no_account">Don\'t have an account? register</string>
     <string name="chat_string">Chats</string>
-    <string name="BaseUrl">http://10.0.2.2:7290/api/</string>
+    <string name="BaseServer">10.0.2.2:7290</string>
     <string name="tvNewContact">Add New Contact</string>
     <string name="tvEntrUsr">Enter Username</string>
     <string name="tvEntrDisName">Enter Nickname</string>

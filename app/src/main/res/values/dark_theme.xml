@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="darkTheme.Ex3" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/darkFirstColor</item>
+        <item name="colorPrimaryVariant">@color/darkSecondColor</item>
+        <item name="colorOnPrimary">@color/white</item>
+        android:background="@drawable/gradient_background"
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/pink</item>
+        <item name="colorSecondaryVariant">@color/peach</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">#131313</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="darkTheme.Ex3.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="darkTheme.Ex3.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="darkTheme.Ex3.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

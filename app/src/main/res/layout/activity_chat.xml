@@ -81,7 +81,7 @@
             android:text="Send"
             android:textColor="@color/black" />
 
-
     </RelativeLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -82,16 +82,19 @@ public class MessageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (messages != null) {
             int type = holder.getItemViewType();
+            Message current = messages.get(position);
+            LocalDateTime date = LocalDateTime.parse(current.getCreated());
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm");
+            String time = format.format(date);
+
             if (type == 0) {
-                Message current = messages.get(position);
                 MessageMeViewHolder me = (MessageMeViewHolder) holder;
                 me.tvContentMe.setText(current.getContent());
-                me.tvCreatedMe.setText(current.getCreated());
+                me.tvCreatedMe.setText(time);
             } else {
-                Message current = messages.get(position);
                 MessageOtherViewHolder other = (MessageOtherViewHolder) holder;
                 other.tvContentOther.setText(current.getContent());
-                other.tvCreatedOther.setText(current.getCreated());
+                other.tvCreatedOther.setText(time);
             }
         }
 

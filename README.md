@@ -1,4 +1,4 @@
-# Our AndroidClient
+# SNL AndroidClient
 Shirin Bazis 211492970\
 Leonardo Rodin 207377151\
 Anastasia Khizgiyaev 208478453
@@ -35,26 +35,21 @@ Log in with one of your new users.
 ### `6. Add new contacts`
 
 After you registered with other new users, you can add them as new contacts\
-(by clicking the +contact icon on the top of the contact list).
+(by clicking the +contact icon on the bottom of the contact list).
 
 ### `6. Start chatting!`
 
-In the left side of the screen you can see your contact list, with your recent messages and their time.\
+You can see your contact list, with your recent messages and their time.\
 On the top of the contact list, you can see your nickname and your profile photo.\
-If you click on a certain contact, you can see your chat with him on the right side of the screen.\
+If you click on a certain contact, you can see your chat with him.\
 You can switch between the contacts and see the recent messages between you and them.\
-*Epecially for ex2:* you can see the messages in the moment they had just been sent, between 2 different online users.
+*Epecially because we are a group of 3:* you can swith the resulotion of the application to a horizontal one.
 
 In addition, we have *bonus* featers as described below:
-- You can change your profile photo by clicking on it.
+- You can see your profile photo changed by refreshing the app.
 - You can click on the settings icon on the bottom left corner of the screen and then you have several options:
    1. Change the 2 color theme of the website.
-   2. Change the chat's background by picking another picture on your PC.
-   3. Reset to the website's default settings.
-   4. Log out.
- 
- * Due to current exercise instructions, certain events we have made on Exercise 1 are not supported in this exercise\
-   (Such as different types of messages, and our bonus features of changing profile photo).
+   2. Reset to the website's default settings.
 
 
 

@@ -3,6 +3,7 @@ package com.example.ex3.res.api;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.ex3.AppDB;
 import com.example.ex3.Ex3;
 import com.example.ex3.R;
 import com.example.ex3.res.dao.ContactDao;
@@ -27,11 +28,11 @@ public class MessagesAPI {
     private Retrofit retrofit;
     private WebServiceAPI webServiceAPI;
 
-    public MessagesAPI(MutableLiveData<List<Message>> messageListData, MessageDao dao, String token){
+    public MessagesAPI(MutableLiveData<List<Message>> messageListData, MessageDao dao, String token) {
         this.messageListData = messageListData;
         this.dao = dao;
         retrofit = new Retrofit.Builder()
-                .baseUrl(Ex3.context.getString(R.string.BaseUrl)).client((
+                .baseUrl("http://" + Ex3.server + "/api/").client((
                         new OkHttpClient.Builder()).addInterceptor(
                         chain -> chain.proceed(chain.request().newBuilder()
                                 .addHeader("Authorization", "Bearer " + token).build())).build())
@@ -39,16 +40,21 @@ public class MessagesAPI {
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }
 
-    public void getAllMessages(CallbackListener listener) {
-        Call<List<Message>> call = webServiceAPI.getMessages("noa levy");
+    public void getMessages(String id, CallbackListener listener) {
+        Call<List<Message>> call = webServiceAPI.getMessages(id);
         call.enqueue(new Callback<List<Message>>() {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
                 if (response.code() == 200) {
                     new Thread(() -> {
-                        dao.clear();
-                        dao.insertList(response.body());
-                        messageListData.postValue(dao.getAll());
+                        dao.clear(id);
+                        List<Message> temp = response.body();
+                        assert temp != null;
+                        for (Message m : temp) {
+                            m.setContactName(id);
+                        }
+                        dao.insertList(temp);
+                        messageListData.postValue(dao.get(id));
                         listener.onResponse(response.code());
                     }).start();
                 } else {
@@ -58,44 +64,53 @@ public class MessagesAPI {
 
             @Override
             public void onFailure(Call<List<Message>> call, Throwable t) {
-                listener.onFailure();
+                if (listener != null)
+                    listener.onFailure();
             }
         });
     }
 
-//    public void sendMessage(@NonNull Contact contact,@NonNull Message message, CallbackListener listener, String username) {
-//        Transfer transfer = new Transfer(username, contact.getId(), message.getContent());
-//        Call<Void> callA = contactWebService(contact.getServer()).sendInvitation(invitation);
-//        callA.enqueue(new Callback<Void>() {
-//            @Override
-//            public void onResponse(Call<Void> call, Response<Void> response) {
-//                if (response.code() == 201) {
-//                    Call<Void> callB = webServiceAPI.addContact(contact);
-//                    callB.enqueue(new Callback<Void>() {
-//                        @Override
-//                        public void onResponse(Call<Void> call, Response<Void> response) {
-//                            if (response.code() == 201) {
-//                                new Thread(() -> {
-//                                    dao.insert(contact);
-//                                }).start();
-//                            }
-//                            listener.onResponse(response.code());
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<Void> call, Throwable t) {
-//                            listener.onFailure();
-//                        }
-//                    });
-//                } else {
-//                    listener.onResponse(response.code());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Void> call, Throwable t) {
-//                listener.onFailure();
-//            }
-//        });
-//    }
+    private WebServiceAPI contactWebService(String server) {
+        String url = "http://" + server + "/api/";
+        Retrofit tempRetrofit = new Retrofit.Builder()
+                .baseUrl(url).addConverterFactory(GsonConverterFactory.create()).build();
+        return tempRetrofit.create(WebServiceAPI.class);
+    }
+
+    public void sendMessage(@NonNull Message message, CallbackListener listener, String username) {
+        Contact findContact = AppDB.getInstance().contactDao().get(message.getContactName());
+        Transfer transfer = new Transfer(username, message.getContactName(), message.getContent());
+        Call<Void> callA = contactWebService(findContact.getServer()).transfer(transfer);
+        callA.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.code() == 201) {
+                    Call<Void> callB = webServiceAPI.sendMessage(message.getContactName(), message);
+                    callB.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if (response.code() == 201) {
+                                new Thread(() -> {
+                                    dao.insert(message);
+                                }).start();
+                            }
+                            listener.onResponse(response.code());
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            listener.onFailure();
+                        }
+                    });
+                } else {
+                    listener.onResponse(response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                listener.onFailure();
+            }
+        });
+    }
 }

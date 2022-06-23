@@ -1,7 +1,5 @@
 package com.example.ex3.res.repositories;
 
-import android.app.Application;
-
 import com.example.ex3.AppDB;
 import com.example.ex3.res.api.CallbackListener;
 import com.example.ex3.res.dao.ContactDao;
@@ -15,8 +13,8 @@ public class UserRepository {
     private ContactDao contactDao;
     private LoggedUserDao loggedUserDao;
 
-    public UserRepository(Application application) {
-        AppDB db = AppDB.getInstance(application);
+    public UserRepository() {
+        AppDB db = AppDB.getInstance();
         contactDao = db.contactDao();
         loggedUserDao = db.loggedUserDao();
     }

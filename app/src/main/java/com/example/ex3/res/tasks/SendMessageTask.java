@@ -12,13 +12,13 @@ import com.example.ex3.res.entities.Message;
 
 import java.util.List;
 
-public class AddMessageTask extends AsyncTask<Void, Void, Void> {
+public class SendMessageTask extends AsyncTask<Void, Void, Void> {
     private Message message;
     private CallbackListener callbackListener;
     private MessagesAPI messagesAPI;
     private String username;
 
-    public AddMessageTask(Message message, MessageDao dao, CallbackListener listener, List<String> args) {
+    public SendMessageTask(Message message, MessageDao dao, CallbackListener listener, List<String> args) {
         this.message = message;
         this.callbackListener = listener;
         this.messagesAPI = new MessagesAPI(null, dao, args.get(1));
@@ -27,7 +27,7 @@ public class AddMessageTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... voids) {
-        ///////////////////////////////////
+        messagesAPI.sendMessage(message, callbackListener, username);
         return null;
     }
 }

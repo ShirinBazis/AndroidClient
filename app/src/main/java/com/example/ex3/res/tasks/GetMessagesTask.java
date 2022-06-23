@@ -14,16 +14,18 @@ import java.util.List;
 public class GetMessagesTask extends AsyncTask<Void, Void, Void> {
     private CallbackListener callbackListener;
     private MessagesAPI messagesAPI;
+    private final String contactId;
 
-    public GetMessagesTask(MutableLiveData<List<Message>> postListData, MessageDao dao,
+    public GetMessagesTask(String contextId, MutableLiveData<List<Message>> postListData, MessageDao dao,
                            CallbackListener listener, String token) {
         this.callbackListener = listener;
         this.messagesAPI = new MessagesAPI(postListData, dao, token);
+        this.contactId = contextId;
     }
 
     @Override
     protected Void doInBackground(Void... voids) {
-        messagesAPI.getAllMessages(callbackListener);
+        messagesAPI.getMessages(contactId, callbackListener);
         return null;
     }
 }

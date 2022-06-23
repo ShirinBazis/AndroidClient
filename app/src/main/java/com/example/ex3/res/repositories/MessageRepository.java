@@ -7,13 +7,9 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.ex3.AppDB;
 import com.example.ex3.res.api.CallbackListener;
-import com.example.ex3.res.dao.ContactDao;
 import com.example.ex3.res.dao.MessageDao;
-import com.example.ex3.res.entities.Contact;
 import com.example.ex3.res.entities.Message;
-import com.example.ex3.res.tasks.AddContactTask;
-import com.example.ex3.res.tasks.AddMessageTask;
-import com.example.ex3.res.tasks.GetContactsTask;
+import com.example.ex3.res.tasks.SendMessageTask;
 import com.example.ex3.res.tasks.GetMessagesTask;
 
 import java.util.ArrayList;
@@ -24,28 +20,34 @@ public class MessageRepository {
     private MessageDao dao;
     private MessageListData messageListData;
     private List<String> args;
+    private String contactId;
 
-    public MessageRepository(Application application) {
-        AppDB db = AppDB.getInstance(application);
+    public MessageRepository(Application application, String contactId) {
+        AppDB db = AppDB.getInstance();
         dao = db.messageDao();
-        messageListData = new MessageRepository.MessageListData(application);
+        this.contactId = contactId;
+        messageListData = new MessageRepository.MessageListData(application, contactId);
         args = new ArrayList<>();
         this.args.add(db.loggedUserDao().getAll().get(0).getUsername());
         this.args.add(db.loggedUserDao().getAll().get(0).getToken());
     }
 
-    public void reload(CallbackListener listener) {
+    public void reload(String id, CallbackListener listener) {
         if (listener == null) {
             listener = CallbackListener.getDefault();
         }
-        new GetMessagesTask(messageListData, dao, listener, args.get(1)).execute();
+        if (id == null) {
+            new GetMessagesTask(contactId, messageListData, dao, listener, args.get(1)).execute();
+        } else new GetMessagesTask(id, messageListData, dao, listener, args.get(1)).execute();
     }
 
     class MessageListData extends MutableLiveData<List<Message>> {
         Application application;
+        private final String contactId;
 
-        public MessageListData(Application application) {
+        public MessageListData(Application application, String contactId) {
             super();
+            this.contactId = contactId;
             setValue(new LinkedList<>());
             this.application = application;
         }
@@ -55,9 +57,9 @@ public class MessageRepository {
             super.onActive();
             new Thread(() ->
             {
-                List<Message> list = dao.getAll();
+                List<Message> list = dao.get(contactId);
                 if (list.size() == 0) {
-                    reload(null);
+                    reload(null, null);
                 }
                 messageListData.postValue(list);
             }).start();
@@ -68,8 +70,8 @@ public class MessageRepository {
         return messageListData;
     }
 
-    public void add(Message message, CallbackListener listener) {
-        new AddMessageTask(message, dao, listener, args).execute();
+    public void send(Message message, CallbackListener listener) {
+        new SendMessageTask(message, dao, listener, args).execute();
     }
 }
 

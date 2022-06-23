@@ -13,27 +13,22 @@ import java.util.List;
 @Dao
 public interface MessageDao {
 
-    // return list of messages of specific contact
     @Query("SELECT * FROM message")
     List<Message> getAll();
 
-    // return only the last message
     @Query("SELECT * FROM message WHERE contactName= :contactName ")
-    Message get(String contactName);
+    List<Message> get(String contactName);
 
-    // send a message
     @Insert
     void insert(Message... messages);
 
     @Insert
     void insertList(List<Message> messages);
 
+    @Query("DELETE FROM message WHERE contactName=:id ")
+    void clear(String id);
+
     @Query("DELETE FROM message")
-    void clear();
-
-    // get a message??????????
-    @Update
-    void update(Message... messages);
-
+    void clearAll();
 
 }

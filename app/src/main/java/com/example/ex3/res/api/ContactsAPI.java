@@ -29,9 +29,8 @@ public class ContactsAPI {
     public ContactsAPI(MutableLiveData<List<Contact>> contactListData, ContactDao dao, String token) {
         this.ContactListData = contactListData;
         this.dao = dao;
-        String server = (AppDB.getInstance(Ex3.context).loggedUserDao()).getAll().get(0).getServer();
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://" + server + "/api/").client((
+                .baseUrl("http://" + Ex3.server + "/api/").client((
                         new OkHttpClient.Builder()).addInterceptor(
                         chain -> chain.proceed(chain.request().newBuilder()
                                 .addHeader("Authorization", "Bearer " + token).build())).build())
@@ -65,13 +64,14 @@ public class ContactsAPI {
 
             @Override
             public void onFailure(Call<List<Contact>> call, Throwable t) {
-                listener.onFailure();
+                if (listener != null)
+                    listener.onFailure();
             }
         });
     }
 
     public void addContact(@NonNull Contact contact, CallbackListener listener, String username) {
-        Invitation invitation = new Invitation(username, contact.getId(), contact.getServer());
+        Invitation invitation = new Invitation(username, contact.getId(), Ex3.server);
         Call<Void> callA = contactWebService(contact.getServer()).sendInvitation(invitation);
         callA.enqueue(new Callback<Void>() {
             @Override

@@ -41,8 +41,4 @@ public interface WebServiceAPI {
 
     @POST("transfer")
     Call<Void> transfer(@Body Transfer transfer);
-
-//    @POST("contacts/{id}")
-//    Call<Void> addContact(@Path("id") int id);
-
 }

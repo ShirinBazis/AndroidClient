@@ -14,19 +14,11 @@ public class LoginViewModel extends AndroidViewModel {
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
-        repository = new UserRepository(application);
+        repository = new UserRepository();
     }
 
     public void Login(User user, CallbackListener listener) {
         repository.Login(user, listener);
     }
-
-    //  public List<LoggedUser> getAll() {
-    //    return dao.getAll();
-    // }
-
-    //  public void update(LoggedUser loggedUser) {
-    //    dao.update(loggedUser);
-    //  }
 }
 

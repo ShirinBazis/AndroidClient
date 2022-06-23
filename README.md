@@ -1,4 +1,4 @@
-# SNL AndroidClient
+# SNL Android App
 Shirin Bazis 211492970\
 Leonardo Rodin 207377151\
 Anastasia Khizgiyaev 208478453

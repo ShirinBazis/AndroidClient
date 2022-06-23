@@ -7,7 +7,7 @@ Anastasia Khizgiyaev 208478453
 
 In the project directory, you should:
 
-# on Visual Studio:
+#### on Visual Studio:
 
 ### `1. Update database`
 
@@ -21,7 +21,7 @@ In the project directory, you should:
 Run the WebServer (the token is been written on the text file we have admit in the Moodle) by clicking the green triangle on the top of the VS.
  *notice that the default branch of this repository is "master2" for this exercise
 
-# on Android Studio: 
+#### on Android Studio: 
 
 ### `3. Play the AndroidClient`
 

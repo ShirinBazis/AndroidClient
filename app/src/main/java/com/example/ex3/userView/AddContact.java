@@ -58,7 +58,6 @@ public class AddContact extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         if (Ex3.theme == 0) {
             setTheme(R.style.darkTheme_Ex3);
         } else {

@@ -25,12 +25,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ContactList extends Fragment {
     private ContactListViewModel viewModel;
-    private ChatView frag2;
+    private ChatView chatView;
+
+    public ContactList(MainActivity i, ChatView chatView) {
+        if (chatView == null) {
+            this.chatView = new ChatView(i);
+        } else this.chatView = chatView;
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        frag2 = new ChatView();
         View view = inflater.inflate(R.layout.activity_contact_list, container, false);
         viewModel = new ViewModelProvider(this).get(ContactListViewModel.class);
         startUtil(view);
@@ -50,10 +55,11 @@ public class ContactList extends Fragment {
     private void startUtil(View view) {
         RecyclerView contactList = view.findViewById(R.id.contactList);
         ContactListAdapter adapter = new ContactListAdapter(getContext(), username -> {
-            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
-                ((MainActivity) requireActivity()).replaceFragment(frag2);
-            else {
-
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                chatView.onContactChangeP(username);
+                ((MainActivity) requireActivity()).replaceFragment(chatView);
+            } else {
+                chatView.onContactChangeH(username);
             }
         });
         contactList.setAdapter(adapter);
@@ -67,6 +73,10 @@ public class ContactList extends Fragment {
             }
             adapter.setContacts(contacts);
         });
+    }
+
+    public void refresh() {
+        viewModel.reload(CallbackListener.getDefault());
     }
 
     private CallbackListener getListener(SwipeRefreshLayout refreshLayout) {

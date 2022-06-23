@@ -8,22 +8,26 @@ import androidx.room.RoomDatabase;
 
 import com.example.ex3.res.dao.ContactDao;
 import com.example.ex3.res.dao.LoggedUserDao;
+import com.example.ex3.res.dao.MessageDao;
 import com.example.ex3.res.entities.Contact;
 import com.example.ex3.res.entities.LoggedUser;
+import com.example.ex3.res.entities.Message;
 
-@Database(entities = {Contact.class, LoggedUser.class}, version = 1)
+@Database(entities = {Contact.class, LoggedUser.class, Message.class}, version = 2)
 public abstract class AppDB extends RoomDatabase {
     public abstract ContactDao contactDao();
+
+    public abstract MessageDao messageDao();
 
     public abstract LoggedUserDao loggedUserDao();
 
     private static volatile AppDB appDB;
 
-    public static AppDB getInstance(final Context context) {
+    public static AppDB getInstance() {
         if (appDB == null) {
             synchronized (AppDB.class) {
                 if (appDB == null) {
-                    appDB = Room.databaseBuilder(context.getApplicationContext(), AppDB.class, "app_db")
+                    appDB = Room.databaseBuilder(Ex3.context.getApplicationContext(), AppDB.class, "app_db")
                             .fallbackToDestructiveMigration().allowMainThreadQueries().build();
                 }
             }

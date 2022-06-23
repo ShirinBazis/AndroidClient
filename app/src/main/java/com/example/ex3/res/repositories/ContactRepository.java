@@ -22,7 +22,7 @@ public class ContactRepository {
     private List<String> args;
 
     public ContactRepository(Application application) {
-        AppDB db = AppDB.getInstance(application);
+        AppDB db = AppDB.getInstance();
         dao = db.contactDao();
         contactListData = new ContactListData(application);
         args = new ArrayList<>();

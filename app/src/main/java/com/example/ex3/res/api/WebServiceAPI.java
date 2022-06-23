@@ -2,7 +2,9 @@ package com.example.ex3.res.api;
 
 import com.example.ex3.res.entities.Contact;
 import com.example.ex3.res.entities.Invitation;
+import com.example.ex3.res.entities.Message;
 import com.example.ex3.res.entities.NewUser;
+import com.example.ex3.res.entities.Transfer;
 import com.example.ex3.res.entities.User;
 
 import java.util.List;
@@ -12,6 +14,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface WebServiceAPI {
     @GET("contacts")
@@ -29,7 +32,13 @@ public interface WebServiceAPI {
     @POST("users/Register")
     Call<Void> register(@Body NewUser newUser);
 
-//    @POST("contacts/{id}")
-//    Call<Void> addContact(@Path("id") int id);
+    ///////////////////////
+    @GET("contacts/{id}/messages")
+    Call<List<Message>> getMessages(@Path("id") String id);
 
+    @POST("contacts/{id}/messages")
+    Call<Void> sendMessage(@Path("id") String id, @Body Message message);
+
+    @POST("transfer")
+    Call<Void> transfer(@Body Transfer transfer);
 }

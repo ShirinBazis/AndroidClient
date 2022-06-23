@@ -108,7 +108,7 @@ public class Register extends AppCompatActivity {
             etPassword.setError("Password must be between 4 to 20 characters");
             error = 1;
         } else if (!etPassword.getText().toString().equals(etConfirm.getText().toString())) {
-            etConfirm.setError("This password is different from the previous one");
+            etConfirm.setError("The password hasn't confirmed correctly");
             error = 1;
         }
         return error == 0;

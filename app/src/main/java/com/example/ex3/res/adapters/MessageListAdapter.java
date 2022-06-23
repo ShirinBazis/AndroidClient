@@ -5,30 +5,25 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ex3.R;
-import com.example.ex3.res.entities.Contact;
 import com.example.ex3.res.entities.Message;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
 public class MessageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     class MessageMeViewHolder extends RecyclerView.ViewHolder {
         private TextView tvContentMe;
         private TextView tvCreatedMe;
-        private TextView tvSent;
 
         private MessageMeViewHolder(View itemView) {
             super(itemView);
@@ -40,7 +35,6 @@ public class MessageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     class MessageOtherViewHolder extends RecyclerView.ViewHolder {
         private TextView tvContentOther;
         private TextView tvCreatedOther;
-        private TextView tvSent;
 
         private MessageOtherViewHolder(View itemView) {
             super(itemView);

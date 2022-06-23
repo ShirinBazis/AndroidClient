@@ -21,8 +21,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/firstColor"
             android:theme="@style/Widget.AppCompat.Toolbar"
-            app:popupTheme="@style/Theme.AppCompat.Light">
-        </androidx.appcompat.widget.Toolbar>
+            app:popupTheme="@style/Theme.AppCompat.Light" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -62,8 +61,7 @@
             android:hint="Enter Message"
             android:inputType="text"
             android:maxLines="6"
-            tools:ignore="Autofill"
-            />
+            tools:ignore="Autofill" />
 
         <Button
             android:id="@+id/button_gchat_send"

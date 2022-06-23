@@ -40,12 +40,14 @@ public class ChatView extends Fragment {
     }
 
     public void onContactChangeP(String id) {
+        messageText.getText().clear();
         contactId = id;
     }
 
     public void onContactChangeH(String id) {
         if (contactId != id) {
             contactId = id;
+            messageText.getText().clear();
             viewModel.reload(contactId, CallbackListener.getDefault());
         }
     }
@@ -85,7 +87,7 @@ public class ChatView extends Fragment {
     }
 
     private void startUtil(View view) {
-        String name = AppDB.getInstance().contactDao().get(contactId).getName();
+        //String name = AppDB.getInstance().contactDao().get(contactId).getName();
         RecyclerView messageList = view.findViewById(R.id.lstMessages);
         MessageListAdapter adapter = new MessageListAdapter(getContext());
         messageList.setAdapter(adapter);

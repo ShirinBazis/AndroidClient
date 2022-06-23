@@ -25,9 +25,6 @@
             android:name=".userView.AddContact"
             android:exported="false" />
         <activity
-            android:name=".Chat"
-            android:exported="false" />
-        <activity
             android:name=".form.Settings"
             android:exported="false" />
         <activity

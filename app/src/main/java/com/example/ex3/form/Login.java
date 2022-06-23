@@ -13,6 +13,7 @@ import com.example.ex3.R;
 import com.example.ex3.res.entities.User;
 import com.example.ex3.res.viewModels.LoginViewModel;
 import com.example.ex3.userView.MainActivity;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import android.content.Intent;
 import android.widget.Button;
@@ -64,8 +65,11 @@ public class Login extends AppCompatActivity {
         btnLogin.setOnClickListener(v -> {
             // if all the necessary details correctly inserted, log the user in
             if (areLoginFieldsValid()) {
-                User user = new User(etUsername.getText().toString(), etPassword.getText().toString());
-                viewModel.Login(user, getListener(this));
+                FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(Login.this, instanceIdResult -> {
+                    String newToken = instanceIdResult.getToken();
+                    User user = new User(etUsername.getText().toString(), etPassword.getText().toString(), newToken);
+                    viewModel.Login(user, getListener(this));
+                });
             }
         });
 

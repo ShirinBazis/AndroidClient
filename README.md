@@ -1,4 +1,4 @@
-# Shirin and Leonardo's AndroidClient
+# Our AndroidClient
 Shirin Bazis 211492970\
 Leonardo Rodin 207377151\
 Anastasia Khizgiyaev 208478453

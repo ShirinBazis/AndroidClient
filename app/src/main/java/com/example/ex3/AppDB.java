@@ -13,7 +13,7 @@ import com.example.ex3.res.entities.Contact;
 import com.example.ex3.res.entities.LoggedUser;
 import com.example.ex3.res.entities.Message;
 
-@Database(entities = {Contact.class, LoggedUser.class, Message.class}, version = 2)
+@Database(entities = {Contact.class, LoggedUser.class, Message.class}, version = 1)
 public abstract class AppDB extends RoomDatabase {
     public abstract ContactDao contactDao();
 

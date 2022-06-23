@@ -59,7 +59,7 @@ public class MessageRepository {
             {
                 List<Message> list = dao.get(contactId);
                 if (list.size() == 0) {
-                    reload(null, null);
+                    reload(null, CallbackListener.getDefault());
                 }
                 messageListData.postValue(list);
             }).start();

@@ -53,7 +53,7 @@ public class ContactRepository {
             {
                 List<Contact> list = dao.getAll();
                 if (list.size() == 0) {
-                    reload(null);
+                    reload(CallbackListener.getDefault());
                 }
                 contactListData.postValue(list);
             }).start();

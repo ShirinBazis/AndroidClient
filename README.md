@@ -16,19 +16,23 @@ In the project directory, you should:
 
 ### `2. Play the WebServer`
 
- Run the WebServer (the token is been written on the text file we have admit in the Moodle) by clicking the green triangle on the top of the VS.
+Run the WebServer (the token is been written on the text file we have admit in the Moodle) by clicking the green triangle on the top of the VS.
  *notice that the default branch of this repository is "master2" for this exercise
 
 
-### `3. Register`
+### `3. Play the AndroidClient`
+
+Run the AndroidClient by creating a new device in the device manager and after installing- click on the green triangle on the top of the Android Studio.
+
+### `4. Register`
 
 Add new users to the database.
 
-### `4. Log in`
+### `5. Log in`
 
 Log in with one of your new users.
 
-### `5. Add new contacts`
+### `6. Add new contacts`
 
 After you registered with other new users, you can add them as new contacts\
 (by clicking the +contact icon on the top of the contact list).

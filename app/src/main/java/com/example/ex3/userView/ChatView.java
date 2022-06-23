@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -87,7 +88,11 @@ public class ChatView extends Fragment {
     }
 
     private void startUtil(View view) {
-        //String name = AppDB.getInstance().contactDao().get(contactId).getName();
+        if (contactId != null) {
+            String name = AppDB.getInstance().contactDao().get(contactId).getName();
+            TextView contactName = view.findViewById(R.id.contactName);
+            contactName.setText(name);
+        }
         RecyclerView messageList = view.findViewById(R.id.lstMessages);
         MessageListAdapter adapter = new MessageListAdapter(getContext());
         messageList.setAdapter(adapter);

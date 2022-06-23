@@ -21,7 +21,17 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/firstColor"
             android:theme="@style/Widget.AppCompat.Toolbar"
-            app:popupTheme="@style/Theme.AppCompat.Light" />
+            app:popupTheme="@style/Theme.AppCompat.Light">
+
+            <TextView
+                android:id="@+id/contactName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="35sp"
+                android:textAlignment="center">
+
+            </TextView>
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 

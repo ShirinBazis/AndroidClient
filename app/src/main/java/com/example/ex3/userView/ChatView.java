@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.ex3.AppDB;
 import com.example.ex3.Ex3;
 import com.example.ex3.R;
 import com.example.ex3.res.adapters.MessageListAdapter;
@@ -79,6 +80,7 @@ public class ChatView extends Fragment {
     }
 
     private void startUtil(View view) {
+        String name = AppDB.getInstance().contactDao().get(contactId).getName();
         RecyclerView messageList = view.findViewById(R.id.lstMessages);
         MessageListAdapter adapter = new MessageListAdapter(getContext());
         messageList.setAdapter(adapter);

@@ -28,9 +28,9 @@ public class UsersAPI {
     public UsersAPI(ContactDao contactDao, LoggedUserDao loggedUserDao) {
         this.contactDao = contactDao;
         this.loggedUserDao = loggedUserDao;
+        String server = "http://" + Ex3.server + "/api/";
         retrofit = new Retrofit.Builder()
-                .baseUrl(Ex3.context.getString(R.string.BaseUrl))
-                .addConverterFactory(GsonConverterFactory.create()).build();
+                .baseUrl(server).addConverterFactory(GsonConverterFactory.create()).build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }
 
@@ -57,7 +57,6 @@ public class UsersAPI {
                                 loggedUserDao.update(list.get(0));
                             }
                         }
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -81,7 +80,9 @@ public class UsersAPI {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) { listener.onFailure(); }
+            public void onFailure(Call<Void> call, Throwable t) {
+                listener.onFailure();
+            }
         });
     }
 }

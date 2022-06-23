@@ -21,4 +21,7 @@
     <color name="secondColor">#EE7752</color>
     <color name="secondColorFaded">#CCEE7752</color>
     <color name="niceWhite">#F9FBFF</color>
+
+    <color name="darkFirstColor">#AD9CA3</color>
+    <color name="darkSecondColor">#232222</color>
 </resources>

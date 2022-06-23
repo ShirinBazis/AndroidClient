@@ -42,8 +42,18 @@ public class Register extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Ex3.theme == 0) {
+            setTheme(R.style.darkTheme_Ex3);
+        } else {
+            setTheme(R.style.Theme_Ex3);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        if (Ex3.theme == 0) {
+            findViewById(R.id.registerBkg).setBackgroundResource(R.drawable.dark_gradient_background);
+        } else {
+            findViewById(R.id.registerBkg).setBackgroundResource(R.drawable.gradient_background);
+        }
         Button btnRegister = findViewById(R.id.btnRegister);
         viewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         etUsername = findViewById(R.id.editTextUsername);
@@ -59,7 +69,7 @@ public class Register extends AppCompatActivity {
         btnRegister.setOnClickListener(v -> {
             // if all the necessary details correctly inserted, register the user
             if (areRegisterFieldsValid()) {
-                NewUser newUser = new NewUser(etUsername.getText().toString(),etNickname.getText().toString(), etPassword.getText().toString());
+                NewUser newUser = new NewUser(etUsername.getText().toString(), etNickname.getText().toString(), etPassword.getText().toString());
                 viewModel.Register(newUser, getListener(newUser));
             }
         });
@@ -94,12 +104,10 @@ public class Register extends AppCompatActivity {
         if (!etPassword.getText().toString().matches("^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]+$")) {
             etPassword.setError("Password must contain letters and numbers");
             error = 1;
-        }
-        else if (etPassword.length() < 4 || etPassword.length() > 20) {
+        } else if (etPassword.length() < 4 || etPassword.length() > 20) {
             etPassword.setError("Password must be between 4 to 20 characters");
             error = 1;
-        }
-        else if (!etPassword.getText().toString().equals(etConfirm.getText().toString())) {
+        } else if (!etPassword.getText().toString().equals(etConfirm.getText().toString())) {
             etConfirm.setError("This password is different from the previous one");
             error = 1;
         }

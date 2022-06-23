@@ -26,9 +26,9 @@ public class ChangeServer extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.activity_change_server, null);
         TextView tv = view.findViewById(R.id.tvSettingsCurrentServer);
         tv.setText("Current server is: " + Ex3.server);
-        builder.setView(view).setNegativeButton("Cancel", (DialogInterface.OnClickListener) (dialog, which) -> {
+        builder.setView(view).setNegativeButton("Cancel", (dialog, which) -> {
 
-        }).setPositiveButton("Change", (DialogInterface.OnClickListener) (dialog, which) -> {
+        }).setPositiveButton("Change", (dialog, which) -> {
             EditText et = view.findViewById(R.id.etSettingsChangeServer);
             if (et.getText().length() != 0) {
                 Ex3.changeServer(et.getText().toString());

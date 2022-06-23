@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
+import com.example.ex3.Ex3;
 import com.example.ex3.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,8 +19,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        contactListP = new ContactList(this, null);
+        if (Ex3.theme == 0) {
+            setTheme(R.style.darkTheme_Ex3);
+        } else {
+            setTheme(R.style.Theme_Ex3);
+        }
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_contact);
+        contactListP = new ContactList(this, null);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             setContentView(R.layout.horizontal_view);
             HorizontalMode();

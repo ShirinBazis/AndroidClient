@@ -1,5 +1,6 @@
 package com.example.ex3.userView;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +27,8 @@ import com.example.ex3.res.api.CallbackListener;
 import com.example.ex3.res.entities.Message;
 import com.example.ex3.res.viewModels.ChatViewViewModel;
 
+import java.time.LocalDateTime;
+
 public class ChatView extends Fragment {
     View view;
     ChatViewViewModel viewModel;
@@ -37,12 +41,14 @@ public class ChatView extends Fragment {
     }
 
     public void onContactChangeP(String id) {
+        messageText.getText().clear();
         contactId = id;
     }
 
     public void onContactChangeH(String id) {
         if (contactId != id) {
             contactId = id;
+            messageText.getText().clear();
             viewModel.reload(contactId, CallbackListener.getDefault());
         }
     }
@@ -63,6 +69,7 @@ public class ChatView extends Fragment {
         };
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,7 +80,7 @@ public class ChatView extends Fragment {
         messageText = view.findViewById(R.id.edit_gchat_message);
         sendBtn.setOnClickListener(v -> {
             if (messageText.getText().length() != 0 && contactId != null) {
-                Message m = new Message(messageText.getText().toString(), "time", "true", contactId);
+                Message m = new Message(messageText.getText().toString(), LocalDateTime.now().toString(), "true", contactId);
                 viewModel.sendMessage(m, getListener());
             }
         });

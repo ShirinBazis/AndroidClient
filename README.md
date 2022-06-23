@@ -7,16 +7,17 @@ Anastasia Khizgiyaev 208478453
 
 In the project directory, you should:
 
-### `1. Run npm install`
+### `1. Update database`
 
+- In order to update the client with new information, we would need to update the database.
+- In the upper toolbox, press View -> Other Windows -> Packge Manager Console.
+- Inside the console, enter "Uptade-Database". 
+- After the process has finished, the consloe supposed to write "Done.". 
 
-### `2. Run npm start`
+### `2. Play the WebServer`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ Run the WebServer (the token is been written on the text file we have admit in the Moodle) by clicking the green triangle on the top of the VS.
+ *notice that the default branch of this repository is "master2" for this exercise
 
 
 ### `3. Register`

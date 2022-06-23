@@ -41,7 +41,7 @@ public class ChatView extends Fragment {
     public void onContactChangeH(String id) {
         if (contactId != id) {
             contactId = id;
-            viewModel.reload(contactId, null);
+            viewModel.reload(contactId, CallbackListener.getDefault());
         }
     }
 
@@ -51,6 +51,7 @@ public class ChatView extends Fragment {
             public void onResponse(int code) {
                 messageText.getText().clear();
                 mainActivity.onMessageSend();
+                viewModel.reload(contactId, CallbackListener.getDefault());
             }
 
             @Override
@@ -65,11 +66,6 @@ public class ChatView extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_chat_view, container, false);
         viewModel = new ViewModelProvider(this).get(ChatViewViewModel.class);
-//        viewModel.get(contactId).observe(getViewLifecycleOwner(), messages -> {
-//            if (messages.size() != 0) {
-//                Toast.makeText(getContext(), messages.get(0).getContent(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
         startUtil(view);
         Button sendBtn = view.findViewById(R.id.button_gchat_send);
         messageText = view.findViewById(R.id.edit_gchat_message);
@@ -93,6 +89,7 @@ public class ChatView extends Fragment {
                 refreshLayoutMessages.setRefreshing(false);
             }
             adapter.setMessages(messages);
+            messageList.scrollToPosition(adapter.getItemCount()-1);
         });
     }
 }

@@ -12,9 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.ex3.Ex3;
 import com.example.ex3.R;
+import com.example.ex3.res.adapters.MessageListAdapter;
 import com.example.ex3.res.api.CallbackListener;
 import com.example.ex3.res.entities.Message;
 import com.example.ex3.res.viewModels.ChatViewViewModel;
@@ -61,11 +65,12 @@ public class ChatView extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_chat_view, container, false);
         viewModel = new ViewModelProvider(this).get(ChatViewViewModel.class);
-        viewModel.get(contactId).observe(getViewLifecycleOwner(), messages -> {
-            if (messages.size() != 0) {
-                Toast.makeText(getContext(), messages.get(0).getContent(), Toast.LENGTH_SHORT).show();
-            }
-        });
+//        viewModel.get(contactId).observe(getViewLifecycleOwner(), messages -> {
+//            if (messages.size() != 0) {
+//                Toast.makeText(getContext(), messages.get(0).getContent(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+        startUtil(view);
         Button sendBtn = view.findViewById(R.id.button_gchat_send);
         messageText = view.findViewById(R.id.edit_gchat_message);
         sendBtn.setOnClickListener(v -> {
@@ -75,5 +80,19 @@ public class ChatView extends Fragment {
             }
         });
         return view;
+    }
+
+    private void startUtil(View view){
+        RecyclerView messageList = view.findViewById(R.id.lstMessages);
+        MessageListAdapter adapter = new MessageListAdapter(getContext());
+        messageList.setAdapter(adapter);
+        messageList.setLayoutManager(new LinearLayoutManager(getContext()));
+        SwipeRefreshLayout refreshLayoutMessages = view.findViewById(R.id.refreshLayoutMessages);
+        viewModel.get(contactId).observe(getViewLifecycleOwner(), messages -> {
+            if (messages.size() != 0) {
+                refreshLayoutMessages.setRefreshing(false);
+            }
+            adapter.setMessages(messages);
+        });
     }
 }

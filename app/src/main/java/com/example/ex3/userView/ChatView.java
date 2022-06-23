@@ -71,25 +71,26 @@ public class ChatView extends Fragment {
         messageText = view.findViewById(R.id.edit_gchat_message);
         sendBtn.setOnClickListener(v -> {
             if (messageText.getText().length() != 0 && contactId != null) {
-                Message m = new Message(messageText.getText().toString(), "time", "True", contactId);
+                Message m = new Message(messageText.getText().toString(), "time", "true", contactId);
                 viewModel.sendMessage(m, getListener());
             }
         });
         return view;
     }
 
-    private void startUtil(View view){
+    private void startUtil(View view) {
         RecyclerView messageList = view.findViewById(R.id.lstMessages);
         MessageListAdapter adapter = new MessageListAdapter(getContext());
         messageList.setAdapter(adapter);
         messageList.setLayoutManager(new LinearLayoutManager(getContext()));
         SwipeRefreshLayout refreshLayoutMessages = view.findViewById(R.id.refreshLayoutMessages);
+        refreshLayoutMessages.setOnRefreshListener(() -> viewModel.reload(contactId, CallbackListener.getDefault()));
         viewModel.get(contactId).observe(getViewLifecycleOwner(), messages -> {
             if (messages.size() != 0) {
                 refreshLayoutMessages.setRefreshing(false);
             }
             adapter.setMessages(messages);
-            messageList.scrollToPosition(adapter.getItemCount()-1);
+            messageList.scrollToPosition(adapter.getItemCount() - 1);
         });
     }
 }

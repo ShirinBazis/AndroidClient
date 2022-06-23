@@ -20,6 +20,7 @@ import com.example.ex3.res.entities.Message;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class MessageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -55,43 +56,43 @@ public class MessageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         mInflater = LayoutInflater.from(context);
     }
 
-//    @Override
-//    public int getItemViewType(int position) {
-//        String other = messages.get(position).getSent();
-//        if (other == ""){
-//            return 1;
-//        }
-//        return 0;
-//    }
+    @Override
+    public int getItemViewType(int position) {
+        String other = messages.get(position).getSent();
+        if (Objects.equals(other, "false")) {
+            return 1;
+        }
+        return 0;
+    }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        if (viewType == 0) {
+        if (viewType == 0) {
             View itemViewMe = mInflater.inflate(R.layout.me_message_layout, parent, false);
             return new MessageMeViewHolder(itemViewMe);
-//        } else {
-//            View itemViewOther = mInflater.inflate(R.layout.other_message_layout, parent, false);
-//            return new MessageOtherViewHolder(itemViewOther);
-//        }
+        } else {
+            View itemViewOther = mInflater.inflate(R.layout.other_message_layout, parent, false);
+            return new MessageOtherViewHolder(itemViewOther);
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (messages != null){
+        if (messages != null) {
             int type = holder.getItemViewType();
-//            if (type == 0){
+            if (type == 0) {
                 Message current = messages.get(position);
-                MessageMeViewHolder me = (MessageMeViewHolder)holder;
+                MessageMeViewHolder me = (MessageMeViewHolder) holder;
                 me.tvContentMe.setText(current.getContent());
                 me.tvCreatedMe.setText(current.getCreated());
-//            } else {
-//                Message current = messages.get(position);
-//                MessageOtherViewHolder other = (MessageOtherViewHolder)holder;
-//                other.tvContentOther.setText(current.getContent());
-//                other.tvCreatedOther.setText(current.getCreated());
-//            }
+            } else {
+                Message current = messages.get(position);
+                MessageOtherViewHolder other = (MessageOtherViewHolder) holder;
+                other.tvContentOther.setText(current.getContent());
+                other.tvCreatedOther.setText(current.getCreated());
+            }
         }
 
     }

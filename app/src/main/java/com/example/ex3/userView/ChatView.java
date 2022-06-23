@@ -41,14 +41,12 @@ public class ChatView extends Fragment {
     }
 
     public void onContactChangeP(String id) {
-        messageText.getText().clear();
         contactId = id;
     }
 
     public void onContactChangeH(String id) {
         if (contactId != id) {
             contactId = id;
-            messageText.getText().clear();
             viewModel.reload(contactId, CallbackListener.getDefault());
         }
     }
